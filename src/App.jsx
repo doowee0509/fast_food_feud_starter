@@ -1,4 +1,8 @@
 import * as React from "react"
+import Header from "/src/components/Header/Header"
+import Instruction from "/src/components/Instructions/Instructions"
+import Chip from "/src/components/Chip/Chip"
+import NutritionalLabel from "/src/components/NutritionalLabel/NutritionalLabel"
 // IMPORT ANY NEEDED COMPONENTS HERE
 import { createDataSet } from "./data/dataset"
 import "./App.css"
@@ -28,30 +32,45 @@ export function App() {
         <div className="categories options">
           <h2 className="title">Categories</h2>
           {/* YOUR CODE HERE */}
+          {categories.map((category) => (
+            <Chip key={category} label={category}/>
+          ))}
         </div>
       </div>
 
       {/* MAIN COLUMN */}
       <div className="container">
         {/* HEADER GOES HERE */}
+        <Header title={appInfo.title} tagline={appInfo.tagline} description={appInfo.description}/>
 
         {/* RESTAURANTS ROW */}
         <div className="RestaurantsRow">
           <h2 className="title">Restaurants</h2>
-          <div className="restaurants options">{/* YOUR CODE HERE */}</div>
+          <div className="restaurants options">
+            {/* YOUR CODE HERE */}
+            {restaurants.map((restaurant) => (
+            <Chip key={restaurant} label={restaurant}/>
+          ))}
+          </div>
         </div>
 
         {/* INSTRUCTIONS GO HERE */}
+        <Instruction instructions={appInfo.instructions.start}/>
+
 
         {/* MENU DISPLAY */}
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
             {/* YOUR CODE HERE */}
+
           </div>
 
           {/* NUTRITION FACTS */}
-          <div className="NutritionFacts nutrition-facts">{/* YOUR CODE HERE */}</div>
+          <div className="NutritionFacts nutrition-facts">
+            {/* YOUR CODE HERE */}
+            
+            </div>
         </div>
 
         <div className="data-sources">
