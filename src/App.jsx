@@ -25,6 +25,13 @@ export const appInfo = {
 const { data, categories, restaurants } = createDataSet()
 
 export function App() {
+  const [cat, setCategory] = React.useState("")
+  const [res, setRestaurant] = React.useState("")
+  const [clickedItem, setItem] = React.useState(null)
+
+  const currentMenuItems = data.filter((item) => {
+    return item.food_category === cat && item.restaurant === res
+  })
   return (
     <main className="App">
       {/* CATEGORIES COLUMN */}
@@ -33,7 +40,7 @@ export function App() {
           <h2 className="title">Categories</h2>
           {/* YOUR CODE HERE */}
           {categories.map((category) => (
-            <Chip key={category} label={category}/>
+            <Chip key={category} label={category} onClick={()=> setCategory(category)} isActive={cat === category} onClose={()=> setCategory("")}/>
           ))}
         </div>
       </div>
@@ -49,7 +56,7 @@ export function App() {
           <div className="restaurants options">
             {/* YOUR CODE HERE */}
             {restaurants.map((restaurant) => (
-            <Chip key={restaurant} label={restaurant}/>
+            <Chip key={restaurant} label={restaurant} onClick={()=> setRestaurant(restaurant)} isActive={res === restaurant}/>
           ))}
           </div>
         </div>
@@ -62,14 +69,17 @@ export function App() {
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
-            {/* YOUR CODE HERE */}
-
+            {
+              currentMenuItems.map((item, i) => (
+                <Chip key={item.item_name} label={item.item_name} onClick={() => setItem(item)}
+                isActive={clickedItem && clickedItem.item_name === item.item_name}/>
+              ))
+            }
           </div>
 
           {/* NUTRITION FACTS */}
           <div className="NutritionFacts nutrition-facts">
-            {/* YOUR CODE HERE */}
-            
+            {clickedItem ? <NutritionalLabel item={clickedItem}/> : null}
             </div>
         </div>
 
