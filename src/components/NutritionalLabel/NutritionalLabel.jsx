@@ -4,7 +4,6 @@ import "./NutritionalLabel.css"
 
 export function NutritionalLabel(props) {
   const item = props.item
-  console.log(item)
   return (
     <div className="nutritional-label">
       <h3 className="title">Nutrition Facts</h3>
