@@ -8,9 +8,9 @@ export function MenuDisplay(props) {
         <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
             {
-                props.item.map((item, i) => (
+                props.item.map((item) => (
                 <Chip key={item.item_name} label={item.item_name} onClick={() => props.setter(item)}
-                isActive={props.clickedItem && props.clickedItem.item_name === props.item.item_name}/>
+                isActive={props.clickedItem && props.clickedItem.item_name === item.item_name}/>
                 ))
             }
             </div>
