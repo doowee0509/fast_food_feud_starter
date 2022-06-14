@@ -7,7 +7,7 @@ export function CategoriesColumn(props) {
         <div className="categories options">
         <h2 className="title">Categories</h2>
         {props.categories.map((category) => (
-            <Chip key={category} label={category} onClick={()=> {props.setter(category); console.log('btn-clicked')}} close={()=> {props.setter(null); console.log('x clicked')}}isActive={props.cat === category}/>
+            <Chip key={category} label={category} onClick={()=> {props.setter(category);}} close={(e)=> {e.stopPropagation(); props.setter(null); }}isActive={props.cat === category}/>
         ))}
         </div>
     </div>

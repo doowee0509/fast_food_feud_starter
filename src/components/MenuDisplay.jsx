@@ -9,7 +9,7 @@ export function MenuDisplay(props) {
             <h2 className="title">Menu Items</h2>
             {
                 props.item.map((item) => (
-                <Chip key={item.item_name} label={item.item_name} onClick={() => props.setter(item)}
+                <Chip key={item.item_name} label={item.item_name} onClick={() => props.setter(item)} close={(e)=> {e.stopPropagation(); props.setter(null); }}
                 isActive={props.clickedItem && props.clickedItem.item_name === item.item_name}/>
                 ))
             }

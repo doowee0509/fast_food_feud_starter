@@ -44,7 +44,7 @@ export function App() {
     setRestaurant(res)
     setItem(null)
   }
-
+  
   const getInstruction = () => {
     if(!cat && !res && !clickedItem) {
       return <Instructions instructions={appInfo.instructions.start}/>
