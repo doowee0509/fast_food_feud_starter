@@ -1,6 +1,6 @@
 import * as React from "react"
 import Header from "/src/components/Header/Header"
-import Instruction from "/src/components/Instructions/Instructions"
+import Instructions from "/src/components/Instructions/Instructions"
 import CategoriesColumn from "./components/CategoriesColumn"
 import DataSource from "./components/DataSource"
 // IMPORT ANY NEEDED COMPONENTS HERE
@@ -27,20 +27,35 @@ export const appInfo = {
 const { data, categories, restaurants } = createDataSet()
 
 export function App() {
-  const [cat, setCategory] = React.useState("")
-  const [res, setRestaurant] = React.useState("")
+  const [cat, setCategory] = React.useState(null)
+  const [res, setRestaurant] = React.useState(null)
   const [clickedItem, setItem] = React.useState(null)
 
   const currentMenuItems = data.filter((item) => {
     return item.food_category === cat && item.restaurant === res
   })
+
+  const getInstruction = () => {
+    if(!cat && !res && !clickedItem) {
+      return <Instructions instructions={appInfo.instructions.start}/>
+    } else if (cat && !res && !clickedItem){
+      return <Instructions instructions={appInfo.instructions.onlyCategory}/>
+    } else if (!cat && res && !clickedItem){
+      return <Instructions instructions={appInfo.instructions.onlyRestaurant}/>
+    } else if (cat && res && !clickedItem){
+      return <Instructions instructions={appInfo.instructions.noSelectedItem}/>
+    }
+    else {
+      return <Instructions instructions={appInfo.instructions.allSelected}/>
+    }
+  }
   return (
     <main className="App">
       <CategoriesColumn categories={categories} setter={setCategory} cat={cat}/>
       <div className="container">
         <Header title={appInfo.title} tagline={appInfo.tagline} description={appInfo.description}/>
         <RestaurantsRows restaurants={restaurants} setter={setRestaurant} res={res}/>
-        <Instruction instructions={appInfo.instructions.start}/>
+        {getInstruction()}
         <MenuDisplay clickedItem={clickedItem} setter={setItem} item={currentMenuItems}/>
         <DataSource data={appInfo}/>
       </div>
