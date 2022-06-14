@@ -35,6 +35,16 @@ export function App() {
     return item.food_category === cat && item.restaurant === res
   })
 
+  const changeCategory = (cat) => {
+    setCategory(cat)
+    setItem(null)
+  }
+
+  const changeRestaurant = (res) => {
+    setRestaurant(res)
+    setItem(null)
+  }
+
   const getInstruction = () => {
     if(!cat && !res && !clickedItem) {
       return <Instructions instructions={appInfo.instructions.start}/>
@@ -51,10 +61,10 @@ export function App() {
   }
   return (
     <main className="App">
-      <CategoriesColumn categories={categories} setter={setCategory} cat={cat}/>
+      <CategoriesColumn categories={categories} setter={changeCategory} cat={cat}/>
       <div className="container">
         <Header title={appInfo.title} tagline={appInfo.tagline} description={appInfo.description}/>
-        <RestaurantsRows restaurants={restaurants} setter={setRestaurant} res={res}/>
+        <RestaurantsRows restaurants={restaurants} setter={changeRestaurant} res={res}/>
         {getInstruction()}
         <MenuDisplay clickedItem={clickedItem} setter={setItem} item={currentMenuItems}/>
         <DataSource data={appInfo}/>
